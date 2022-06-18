@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="points_density_viewer" type="points_density_viewer" name="points_density_viewer" output="screen">
+		<remap from="/velodyne_points" to="/cloud/lcl"/>
+        <param name="width" value="30.0" />
+        <!-- SQ2: param -->
+        <param name="height" value="15.0" />
+        <param name="min_height" value="10.0" />
+        <!-- infant param -->
+        <!-- <param name="height" value="4.0" />
+        <param name="min_height" value="3.0" /> -->
+        <param name="voxel_num_x" value="200" />
+        <param name="voxel_num_y" value="200" />
+        <param name="voxel_num_z" value="200" />
+    </node>
+    <!-- <node pkg="complement" type="complement" name="complement"/> -->
+    <node pkg="rviz" type="rviz" name="rviz34" args="-d $(find points_density_viewer)/config/points_density_viewer.rviz"/>
+</launch>
