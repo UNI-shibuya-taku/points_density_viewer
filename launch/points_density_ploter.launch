@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<arg name="csv_dir" default="/home/amsl/pc_csv/density/test.csv"/>
+<launch>
+    <node pkg="points_density_viewer" type="points_density_ploter" name="points_density_ploter" output="screen">
+		<!-- <remap from="/velodyne_points" to="/scanline_life_evaluator/saved_cloud"/> -->
+        <param name="width" value="30.0" />
+        <!-- SQ2: param -->
+        <param name="height" value="15.0" />
+        <param name="min_height" value="10.0" />
+        <param name="csv_dir" value="$(arg csv_dir)"/>
+    </node>
+</launch>

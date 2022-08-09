@@ -1,5 +1,5 @@
-#ifndef __POINTS_DENSITY_VIEWER
-#define __POINTS_DENSITY_VIEWER
+#ifndef __COMPARE_POINTS_DENSITY_VIEWER
+#define __COMPARE_POINTS_DENSITY_VIEWER
 
 #include <ros/ros.h>
 #include <sensor_msgs/point_cloud_conversion.h>
@@ -10,7 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-class PointsDensityViewer
+class ComparePointsDensityViewer
 {
 public:
     typedef pcl::PointXYZI PointXYZI;
@@ -28,7 +28,7 @@ public:
     typedef pcl::PointXYZHSV PointXYZHSV;
     typedef pcl::PointCloud<PointXYZHSV> CloudXYZHSV;
     typedef pcl::PointCloud<PointXYZHSV>::Ptr CloudXYZHSVPtr; 
-    PointsDensityViewer(void);
+    ComparePointsDensityViewer(void);
     void process(void);
     // callback
     void cloud_callback(const sensor_msgs::PointCloud2ConstPtr&);
@@ -58,9 +58,6 @@ private:
     double width_x_2;
     double width_y_2;
     double grid_volume;
-    double density_r;
-    double density_g;
-    double density_b;
     ros::NodeHandle nh;
     ros::NodeHandle local_nh;
     ros::Subscriber cloud_sub;

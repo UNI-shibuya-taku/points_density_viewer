@@ -46,3 +46,21 @@ target_link_libraries(points_density_viewer
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
 )
+
+add_executable(compare_points_density_viewer src/compare_points_density_viewer.cpp)
+target_link_libraries(compare_points_density_viewer
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
+
+add_executable(points_density_ploter src/points_density_ploter.cpp)
+target_link_libraries(points_density_ploter
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)
+
+add_executable(scan_match_score src/scan_match_score.cpp)
+target_link_libraries(scan_match_score
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+)

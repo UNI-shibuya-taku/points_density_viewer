@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="points_density_viewer" type="scan_match_score" name="scan_match_score" output="screen">
+		<remap from="/cloud/source" to="/scanline_life_evaluator/saved_cloud"/>
+		<!-- <remap from="/cloud/target" to="/cloud/lcl"/> -->
+		<param name="leafsize_source" type="double" value="0.15"/>
+		<param name="leafsize_target" type="double" value="0.2"/>
+		<param name="trans_epsilon" type="double" value="1e-3"/>
+		<param name="stepsize" type="double" value="0.1"/>
+		<param name="resolution" type="double" value="0.5"/>
+		<param name="max_iterations" type="int" value="30"/>
+		<param name="correspondence_distance" type="double" value="0.4"/>
+    </node>
+    <!-- <node pkg="rviz" type="rviz" name="rviz34" args="-d $(find points_density_viewer)/config/points_density_viewer.rviz"/> -->
+</launch>
