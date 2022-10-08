@@ -8,6 +8,8 @@ ComparePointsDensityViewer::ComparePointsDensityViewer(void) : local_nh("~")
     local_nh.param("voxel_num_x", voxel_num_x, {500}); // 区切りたい数
     local_nh.param("voxel_num_y", voxel_num_y, {500});
     local_nh.param("voxel_num_z", voxel_num_z, {500});
+    local_nh.param("z_thre", z_thre, {3.0});
+    local_nh.param("is_ceiling", is_ceiling, {false});
     
     cloud_sub = nh.subscribe("/velodyne_points", 1, &ComparePointsDensityViewer::cloud_callback, this); // sq_lidar 1scan
     cloud_pub = nh.advertise<sensor_msgs::PointCloud2>("/density/compare/color_cloud", 1);
@@ -57,6 +59,7 @@ void ComparePointsDensityViewer::cloud_callback(const sensor_msgs::PointCloud2Co
         double p_x = cloud_ptr->points[i].x;
         double p_y = cloud_ptr->points[i].y;
         double p_z = cloud_ptr->points[i].z;
+        if(p_z > z_thre && is_ceiling) continue;
         // 範囲を絞る
         if(p_x < width_x_2 && p_x > -width_x_2 && p_y < width_y_2 && p_y > -width_y_2 && p_z < height && p_z > -min_height){
             int index_x = (int)(p_x / voxel_size_x);
@@ -111,6 +114,7 @@ void ComparePointsDensityViewer::cloud_callback(const sensor_msgs::PointCloud2Co
                         p_hsv.y = cloud_ptr->points[select_index].y;
                         p_hsv.z = cloud_ptr->points[select_index].z;
                         p_hsv.h = 1/the_voxel_density;
+                        // p_hsv.h = the_voxel_density;
                         p_hsv.s = 1.0;
                         p_hsv.v = 1.0;
                         cloud_density_hsv->push_back(p_hsv);

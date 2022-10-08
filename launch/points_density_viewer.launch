@@ -1,34 +1,54 @@
 <?xml version="1.0"?>
-
 <launch>
+  <arg name="z_thre" default="2.9"/>
+  <arg name="is_ceiling" default="true"/>
+  <arg name="voxel_num_x" default="200"/>
+  <arg name="voxel_num_y" default="200"/>
+  <arg name="voxel_num_z" default="200"/>
+  <arg name="width" default="30.0"/>
+  <arg name="height" default="20.0"/>
+  <arg name="min_height" default="10.0"/>
+
     <node pkg="points_density_viewer" type="points_density_viewer" name="points_density_viewer" output="screen">
 		<remap from="/velodyne_points" to="/scanline_life_evaluator/saved_cloud"/>
-        <param name="width" value="30.0" />
+        <param name="width" value="$(arg width)" />
         <!-- SQ2: param -->
-        <param name="height" value="15.0" />
-        <param name="min_height" value="10.0" />
+        <!-- <param name="height" value="15.0" /> -->
+        <param name="height" value="$(arg height)" />
+        <param name="min_height" value="$(arg min_height)" />
         <!-- infant param -->
-        <!-- <param name="height" value="4.0" />
-        <param name="min_height" value="3.0" /> -->
-        <param name="voxel_num_x" value="200" />
-        <param name="voxel_num_y" value="200" />
-        <param name="voxel_num_z" value="200" />
+        <!-- <param name="height" value="4.0" /> -->
+        <!-- <param name="min_height" value="3.0" /> -->
+        <param name="voxel_num_x" value="$(arg voxel_num_x)" />
+        <param name="voxel_num_y" value="$(arg voxel_num_y)" />
+        <param name="voxel_num_z" value="$(arg voxel_num_z)" />
+        <!-- <param name="voxel_num_y" value="200" />
+        <param name="voxel_num_z" value="200" /> -->
+        <!-- <param name="voxel_num_z" value="25/0.15" /> -->
         <param name="density_r" value="10000" />
         <param name="density_g" value="15000" />
         <param name="density_b" value="0" />
+        <param name="z_thre" value="$(arg z_thre)"/>
+        <param name="is_ceiling" value="$(arg is_ceiling)"/>
     </node>
     <node pkg="points_density_viewer" type="compare_points_density_viewer" name="compare_points_density_viewer">
 		<remap from="/velodyne_points" to="/cloud/lcl"/>
-        <param name="width" value="30.0" />
+        <param name="width" value="$(arg width)" />
         <!-- SQ2: param -->
-        <param name="height" value="15.0" />
-        <param name="min_height" value="10.0" />
+        <param name="height" value="$(arg height)" />
+        <param name="min_height" value="$(arg min_height)" />
         <!-- infant param -->
-        <!-- <param name="height" value="4.0" />
-        <param name="min_height" value="3.0" /> -->
-        <param name="voxel_num_x" value="200" />
+        <!-- <param name="height" value="4.0" /> -->
+        <!-- <param name="min_height" value="3.0" /> -->
+        <param name="voxel_num_x" value="$(arg voxel_num_x)" />
+        <param name="voxel_num_y" value="$(arg voxel_num_y)" />
+        <param name="voxel_num_z" value="$(arg voxel_num_z)" />
+        <!-- <param name="voxel_num_x" value="200" />
         <param name="voxel_num_y" value="200" />
-        <param name="voxel_num_z" value="200" />
+        <param name="voxel_num_z" value="200" /> -->
+        <param name="z_thre" value="$(arg z_thre)"/>
+        <param name="is_ceiling" value="$(arg is_ceiling)"/>
     </node>
-    <!-- <node pkg="rviz" type="rviz" name="rviz34" args="-d $(find points_density_viewer)/config/points_density_viewer.rviz"/> -->
+    <node pkg="rviz" type="rviz" name="rviz34" args="-d $(find points_density_viewer)/config/points_density_viewer.rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz35" args="-d $(find points_density_viewer)/config/points_density_viewer_compare.rviz"/>
 </launch>

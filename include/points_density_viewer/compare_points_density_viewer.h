@@ -51,6 +51,7 @@ private:
     int resolution_x, resolution_y, resolution_z;
     int max;
     int min;
+    bool is_ceiling = false;
     double width;
     double height;
     double min_height;
@@ -58,6 +59,7 @@ private:
     double width_x_2;
     double width_y_2;
     double grid_volume;
+    double z_thre;
     ros::NodeHandle nh;
     ros::NodeHandle local_nh;
     ros::Subscriber cloud_sub;
